@@ -2,7 +2,7 @@
    Written by Matthew Beckler - matthew at mbeckler dot org
 
    Code released into the public domain, GPL, or MIT. Pick your poison.
- 
+*/ 
  
  
 unsigned int accel_x;
