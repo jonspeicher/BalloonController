@@ -96,34 +96,3 @@ void getLogFilename(char userString[])
 {
   strcpy(userString, s_filename);
 }
-
-// -------------------------------------------------------------------------------------------------
-// Sample usage: this Arduino sketch opens a log file and periodically writes dummy data to it, 
-// indicating its progress via the Serial Monitor.
-
-// Setup is run once at the beginning of each sketch.  This initializes the log, writes some startup
-// data to it, and prints the name of the current log filename to the Serial Monitor.
-
-void setup(void)
-{ 
-  initLog();
-  logString("LOG BEGIN");
-  
-  char logFilename[15];
-  getLogFilename(logFilename);
-  
-  Serial.begin(9600);
-  Serial.println(logFilename);
-}
-
-// Loop runs continuously.  This loop prints some dummy data to the log, flushes the log, and delays
-// for a bit.
-
-void loop(void)
-{
-  Serial.println("Logging data...");
-  
-  logString("data, data, data, data, data");
-  logFlush();
-  delay(5000);
-}
