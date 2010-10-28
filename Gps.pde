@@ -8,35 +8,19 @@
  4800-baud serial GPS device hooked up on pins 2(rx) and 3(tx).
  */
 
-
 TinyGPS gps;
+
 //change these pins if you use different for gps  
 //2 is yellow 3 is blue  red is 5V and blk is gnd
+
 NewSoftSerial nss(2, 3);
-//the format for our return strings
-const char* signedfmt = "%15li";
-const char* unsignedfmt = "%15lu";
-void gpsdump(TinyGPS &gps);
-bool feedgps();
-void printFloat(double f, int digits = 2);
+
 //we ahve global variables so we can track current position as well as max height and time
+
 long Glat, Glon, GMaxLat, GMaxLong, Galt, GMaxAlt;
 unsigned long Gage, Gdate, Gtime, GMaxAge, GMaxTime, GMaxDate;
-//the following are char[15]
-String GetAlt();
-String GetLon();
-String GetLat();
-String GetMaxAlt();
-String GetDate();
-String GetTime();
-String GetMaxDate();
-String GetMaxTime();
-//the following are char[255]
-String GetGPSData(); //return Gps data fields with tags (lat,lon,date,time,alt) with ADSENSE header text followed by a space
-String GetGPSDataCSV(); //same as previous, but no tags, seperated by commas for easy parsing
-//the following is char[20]
-String GetCurrentAltitude(); //returns ALT followed by a space then the current altitude
 
+/*
 void setup()
 {
   Serial.begin(115200);
@@ -70,6 +54,7 @@ void loop()
   }
 
 }
+*/
 
 void printFloat(double number, int digits)
 {
