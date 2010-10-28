@@ -55,6 +55,13 @@ void printFloat(double number, int digits)
   } 
 }
 
+void initGps(int receivePin, int transmitPin)
+{
+  nss.setRX(receivePin);
+  nss.setTX(transmitPin);
+  nss.begin(4800);
+}
+
 void gpsdump()
 {
   long lat, lon;
