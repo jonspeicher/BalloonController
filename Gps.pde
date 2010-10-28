@@ -20,42 +20,6 @@ NewSoftSerial nss(2, 3);
 long Glat, Glon, GMaxLat, GMaxLong, Galt, GMaxAlt;
 unsigned long Gage, Gdate, Gtime, GMaxAge, GMaxTime, GMaxDate;
 
-/*
-void setup()
-{
-  Serial.begin(115200);
-  nss.begin(4800);
-
-  Serial.print("BalloonGPS : using TinyGPS "); 
-  Serial.println(TinyGPS::library_version());
-  Serial.println();
-  Serial.print("Sizeof(gpsobject) = "); 
-  Serial.println(sizeof(TinyGPS));
-  Serial.println();
-}
-
-void loop()
-{
-
-
-  bool newdata = false;
-  unsigned long start = millis();
-
-  // Every 5 seconds we print an update
-  while (millis() - start < 5000)
-  {
-    if (feedgps())
-      newdata = true;
-  }
-
-  if (newdata)
-  {
-    gpsdump(gps);
-  }
-
-}
-*/
-
 void printFloat(double number, int digits)
 {
   // Handle negative numbers
@@ -91,7 +55,7 @@ void printFloat(double number, int digits)
   } 
 }
 
-void gpsdump(TinyGPS &gps)
+void gpsdump()
 {
   long lat, lon;
   float flat, flon;
@@ -152,18 +116,18 @@ void gpsdump(TinyGPS &gps)
   Serial.print(" Speed(10^-2 knots): "); 
   Serial.println(gps.speed());
   Serial.print("Alt(float): "); 
-  printFloat(gps.f_altitude()); 
+  printFloat(gps.f_altitude(), 2); 
   Serial.print(" Course(float): "); 
-  printFloat(gps.f_course()); 
+  printFloat(gps.f_course(), 2); 
   Serial.println();
   Serial.print("Speed(knots): "); 
-  printFloat(gps.f_speed_knots()); 
+  printFloat(gps.f_speed_knots(), 2); 
   Serial.print(" (mph): ");  
-  printFloat(gps.f_speed_mph());
+  printFloat(gps.f_speed_mph(), 2);
   Serial.print(" (mps): "); 
-  printFloat(gps.f_speed_mps()); 
+  printFloat(gps.f_speed_mps(), 2); 
   Serial.print(" (kmph): "); 
-  printFloat(gps.f_speed_kmph()); 
+  printFloat(gps.f_speed_kmph(), 2); 
   Serial.println();
   Serial.print("Stats: characters: "); 
   Serial.print(chars); 
