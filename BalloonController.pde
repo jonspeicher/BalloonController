@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------------
-// TBD - TBD
+// BalloonController - Flight data collection and logging system for a near-space balloon
 // A project of HackPittsburgh (http://www.hackpittsburgh.org)
 //
 // Copyright (c) 2010 Jonathan Speicher (jonathan@hackpittsburgh.org)
@@ -25,9 +25,12 @@
 
 // Define the analog multiplexer channels for each sensor.
 
-#define ANALOG_MUX_CHANNEL_ACCELEROMETER_X 0
-#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Y 1
-#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Z 2
+#define ANALOG_MUX_CHANNEL_ACCELEROMETER_X     0
+#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Y     1
+#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Z     2
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_INSIDE  3
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_OUTSIDE 4
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_BATTERY 5
 
 // Define the maximium data string length in characters.  This includes the terminating null.
 
@@ -61,8 +64,9 @@ void loop()
   
   if (millis() >= s_lastLogMillis + DATA_SAMPLING_RATE_MS)
   {
-    logAccelerometerData();
     logGpsData();
+    logAccelerometerData();
+    logTemperatureData();
     logFlush();  
     s_lastLogMillis = millis();  
   }
@@ -97,5 +101,23 @@ void logGpsData()
   String dataStringObject = GetGPSDataCSV();
   char dataString[MAX_DATA_STRING_LENGTH];
   dataStringObject.toCharArray(dataString, MAX_DATA_STRING_LENGTH);
+  logString(dataString);
+}
+
+void logTemperatureData()
+{
+  Serial.println("Logging temperature data");
+  
+  selectAnalogMuxChannel(ANALOG_MUX_CHANNEL_TEMPERATURE_INSIDE);
+  int insideTemp = Temperature(ANALOG_MUX_SIGNAL_PIN);
+  
+  selectAnalogMuxChannel(ANALOG_MUX_CHANNEL_TEMPERATURE_OUTSIDE);
+  int outsideTemp = Temperature(ANALOG_MUX_SIGNAL_PIN);
+  
+  selectAnalogMuxChannel(ANALOG_MUX_CHANNEL_TEMPERATURE_BATTERY);
+  int batteryTemp = Temperature(ANALOG_MUX_SIGNAL_PIN);
+  
+  char dataString[MAX_DATA_STRING_LENGTH];
+  sprintf(dataString, "%d,%d,%d", insideTemp, outsideTemp, batteryTemp);
   logString(dataString);
 }
