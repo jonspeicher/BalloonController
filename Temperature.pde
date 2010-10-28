@@ -1,3 +1,7 @@
+/* Code to work with temperature sensors for the HackPGH balloon project.
+   Written by Matthew Stultz
+*/
+
 int Temperature(int pin)
 {
   int iReads[4];

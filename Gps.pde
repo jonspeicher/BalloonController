@@ -1,3 +1,7 @@
+/* Code to work with high-altitude GPS for the HackPGH balloon project.
+   Written by Chris Yohe
+*/
+
 #include <NewSoftSerial.h>
 #include <TinyGPS.h>
 #include <String.h>
