@@ -8,7 +8,8 @@
 
 // Define the data sampling rate in milliseconds.
 
-#define DATA_SAMPLING_RATE_MS 60000    // 60000 ms = 1 min
+//#define DATA_SAMPLING_RATE_MS 60000    // 60000 ms = 1 min
+#define DATA_SAMPLING_RATE_MS 5000
 
 // Define the transmit and receive pins that the GPS module is connected to.
 
@@ -44,8 +45,8 @@ uint32_t s_lastLogMillis = 0;
 
 void setup()
 { 
-  initLog();
-  logString("------ Begin Logging ------");
+  //initLog();
+  //logString("------ Begin Logging ------");
   
   initGps(GPS_RECEIVE_PIN, GPS_TRANSMIT_PIN);
   initAnalogMux(ANALOG_MUX_PIN_S0, ANALOG_MUX_PIN_S1, ANALOG_MUX_PIN_S2, ANALOG_MUX_PIN_S3);
@@ -55,6 +56,7 @@ void setup()
   getLogFilename(logFilename);
   
   Serial.begin(9600);
+  Serial.println("- BALLOON CONTROLLER RUNNING -");
   Serial.println(logFilename);
 }
 
@@ -67,16 +69,30 @@ void loop()
     logGpsData();
     logAccelerometerData();
     logTemperatureData();
-    logFlush();  
+    //logFlush();  
     s_lastLogMillis = millis();  
   }
 }
 
 // Helper functions --------------------------------------------------------------------------------
 
+void logGpsData()
+{
+  Serial.println("-> Logging GPS data...");
+  
+  //gpsdump();
+  
+  String dataStringObject = GetGPSDataCSV();
+  char dataString[MAX_DATA_STRING_LENGTH];
+  dataStringObject.toCharArray(dataString, MAX_DATA_STRING_LENGTH);
+  
+  Serial.println(dataStringObject);
+  //logString(dataString);
+}
+
 void logAccelerometerData()
 {
-  Serial.println("Logging accelerometer data");
+  Serial.println("-> Logging accelerometer data...");
   
   selectAnalogMuxChannel(ANALOG_MUX_CHANNEL_ACCELEROMETER_X);
   accel_sample_x();
@@ -89,24 +105,14 @@ void logAccelerometerData()
   
   char dataString[MAX_DATA_STRING_LENGTH];
   accel_get_all(dataString);
-  logString(dataString);
-}
-
-void logGpsData()
-{
-  Serial.println("Logging GPS data");
   
-  gpsdump();
-  
-  String dataStringObject = GetGPSDataCSV();
-  char dataString[MAX_DATA_STRING_LENGTH];
-  dataStringObject.toCharArray(dataString, MAX_DATA_STRING_LENGTH);
-  logString(dataString);
+  Serial.println(dataString);
+  //logString(dataString);
 }
 
 void logTemperatureData()
 {
-  Serial.println("Logging temperature data");
+  Serial.println("-> Logging temperature data...");
   
   selectAnalogMuxChannel(ANALOG_MUX_CHANNEL_TEMPERATURE_INSIDE);
   int insideTemp = Temperature(ANALOG_MUX_SIGNAL_PIN);
@@ -118,6 +124,8 @@ void logTemperatureData()
   int batteryTemp = Temperature(ANALOG_MUX_SIGNAL_PIN);
   
   char dataString[MAX_DATA_STRING_LENGTH];
-  sprintf(dataString, "%d,%d,%d", insideTemp, outsideTemp, batteryTemp);
-  logString(dataString);
+  sprintf(dataString, "%04X,%04X,%04X", insideTemp, outsideTemp, batteryTemp);
+  
+  Serial.println(dataString);
+  //logString(dataString);
 }
