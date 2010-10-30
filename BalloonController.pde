@@ -13,8 +13,8 @@
 
 // Define the transmit and receive pins that the GPS module is connected to.
 
-#define GPS_RECEIVE_PIN  7
-#define GPS_TRANSMIT_PIN 6
+#define GPS_RECEIVE_PIN  6
+#define GPS_TRANSMIT_PIN 7
 
 // Define the Arduino digital pins that the analog multiplexer is connected to.
 
@@ -82,13 +82,12 @@ void logGpsData()
 {
   Serial.println("-> Logging GPS data...");
   
-  gpsdump();
+  //gpsdump();
   
-  String dataStringObject = GetGPSDataCSV();
   char dataString[MAX_DATA_STRING_LENGTH];
-  dataStringObject.toCharArray(dataString, MAX_DATA_STRING_LENGTH);
+  GetGPSDataCSV(dataString);
   
-  Serial.println(dataStringObject);
+  Serial.println(dataString);
   //logString(dataString);
 }
 

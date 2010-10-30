@@ -17,12 +17,12 @@ TinyGPS gps;
 //change these pins if you use different for gps  
 //2 is yellow 3 is blue  red is 5V and blk is gnd
 
-NewSoftSerial nss(7, 6);
+NewSoftSerial nss(6, 7);
 
-//we ahve global variables so we can track current position as well as max height and time
+//we have static variables so we can track current position as well as max height and time
 
-long Glat, Glon, GMaxLat, GMaxLong, Galt, GMaxAlt;
-unsigned long Gage, Gdate, Gtime, GMaxAge, GMaxTime, GMaxDate;
+static long Glat, Glon, GMaxLat, GMaxLong, Galt, GMaxAlt;
+static unsigned long Gage, Gdate, Gtime, GMaxAge, GMaxTime, GMaxDate;
 
 void printFloat(double number, int digits)
 {
@@ -216,7 +216,7 @@ String GetMaxTime()
   temp = GMaxTime;
   return temp;
 }
-
+/*
 String GetGPSData()
 {
   String LGPS;
@@ -238,32 +238,16 @@ String GetGPSData()
   LGPS += GetMaxTime();  
   return LGPS;
 }
-
-String GetGPSDataCSV()
+*/
+void GetGPSDataCSV(char userString[])
 {
-  String LGPS;
-  LGPS = "ARDSENSE ";
-  LGPS += GetLat();
-  LGPS += ",";
-  LGPS += GetLon();
-  LGPS += ",";
-  LGPS += GetDate();
-  LGPS += ",";
-  LGPS += GetTime();
-  LGPS += ",";
-  LGPS += GetAlt();
-  LGPS += ",";
-  LGPS += GetMaxAlt();
-  LGPS += ",";
-  LGPS += GetMaxDate();
-  LGPS += ",";
-  LGPS += GetMaxTime();
-  return LGPS;
+  sprintf(userString, "ARDSENSE %ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld", Glat, Glon, Gdate, Gtime, Galt, GMaxAlt, GMaxDate, GMaxTime);
 }
 
+/*
 String GetCurrentAltitude()
 {
   return "ALT " + GetAlt();
 }  
-
+*/
 
