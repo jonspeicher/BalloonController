@@ -12,25 +12,25 @@
 
 // Define the transmit and receive pins that the GPS module is connected to.
 
-#define GPS_RECEIVE_PIN  2
-#define GPS_TRANSMIT_PIN 3
+#define GPS_RECEIVE_PIN  7
+#define GPS_TRANSMIT_PIN 6
 
 // Define the Arduino digital pins that the analog multiplexer is connected to.
 
-#define ANALOG_MUX_PIN_S0     0
-#define ANALOG_MUX_PIN_S1     1
-#define ANALOG_MUX_PIN_S2     2
-#define ANALOG_MUX_PIN_S3     3
+#define ANALOG_MUX_PIN_S0     2
+#define ANALOG_MUX_PIN_S1     3
+#define ANALOG_MUX_PIN_S2     4
+#define ANALOG_MUX_PIN_S3     5
 #define ANALOG_MUX_SIGNAL_PIN 0
 
 // Define the analog multiplexer channels for each sensor.
 
-#define ANALOG_MUX_CHANNEL_ACCELEROMETER_X     0
+#define ANALOG_MUX_CHANNEL_ACCELEROMETER_X     2
 #define ANALOG_MUX_CHANNEL_ACCELEROMETER_Y     1
-#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Z     2
-#define ANALOG_MUX_CHANNEL_TEMPERATURE_INSIDE  3
-#define ANALOG_MUX_CHANNEL_TEMPERATURE_OUTSIDE 4
-#define ANALOG_MUX_CHANNEL_TEMPERATURE_BATTERY 5
+#define ANALOG_MUX_CHANNEL_ACCELEROMETER_Z     0
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_INSIDE  13
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_OUTSIDE 14
+#define ANALOG_MUX_CHANNEL_TEMPERATURE_BATTERY 15
 
 // Define the maximium data string length in characters.  This includes the terminating null.
 

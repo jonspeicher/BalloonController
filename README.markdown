@@ -87,6 +87,11 @@ History
 
 * Initial release (totally untested)
 
+0.2
+---
+
+* Update pins to match the balloon flight computer layout
+
 License
 =======
 
