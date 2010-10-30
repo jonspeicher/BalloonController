@@ -55,10 +55,12 @@ is in the code itself.  If you have any questions, email me.
 Tests
 =====
 
-BalloonController is completely and utterly untested.  The code compiles, and that's all.  The
-individual units upon which it relies have been tested, and I tried to be careful with the coding 
-and design.  Nevertheless, I haven't actually *run* this thing, as hardware is not yet available.
-For now, this project primarily serves as an integration point for the various dependencies.
+BalloonController has been bench-tested with the flight computer.  GPS, accelerometer, and logging
+have been verified to work.  Temperature sensing is thought to work in the software but we believe
+that there is a bug in the circuit itself.
+
+The individual units upon which BalloonController relies have also been tested, and I tried to be 
+careful with the coding and design.
 
 Improvements
 ============
