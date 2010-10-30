@@ -82,7 +82,7 @@ void logGpsData()
 {
   Serial.println("-> Logging GPS data...");
   
-  //gpsdump();
+  gpsdump();
   
   char dataString[MAX_DATA_STRING_LENGTH];
   GetGPSDataCSV(dataString);
