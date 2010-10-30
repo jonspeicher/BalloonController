@@ -65,12 +65,14 @@ void loop()
   feedgps();
   
   if (millis() >= s_lastLogMillis + DATA_SAMPLING_RATE_MS)
-  {
+  { 
     logGpsData();
     logAccelerometerData();
     logTemperatureData();
     //logFlush();  
-    s_lastLogMillis = millis();  
+    
+    s_lastLogMillis = millis();
+    Serial.println();
   }
 }
 
@@ -80,7 +82,7 @@ void logGpsData()
 {
   Serial.println("-> Logging GPS data...");
   
-  //gpsdump();
+  gpsdump();
   
   String dataStringObject = GetGPSDataCSV();
   char dataString[MAX_DATA_STRING_LENGTH];

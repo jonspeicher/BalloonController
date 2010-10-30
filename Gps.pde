@@ -17,7 +17,7 @@ TinyGPS gps;
 //change these pins if you use different for gps  
 //2 is yellow 3 is blue  red is 5V and blk is gnd
 
-NewSoftSerial nss(2, 3);
+NewSoftSerial nss(7, 6);
 
 //we ahve global variables so we can track current position as well as max height and time
 
@@ -110,7 +110,7 @@ void gpsdump()
   feedgps();
 
   gps.stats(&chars, &sentences, &failed);
-
+/*
   Serial.println("*******************OFFICIAL******************");
   Serial.print("Lat/Long(10^-5 deg): "); 
   Serial.print(lat); 
@@ -155,6 +155,7 @@ void gpsdump()
   Serial.println("ALT US");
   Serial.println(GetCurrentAltitude());
   Serial.println("***************************************");
+*/
 }
 
 bool feedgps()
