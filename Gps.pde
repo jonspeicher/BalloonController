@@ -21,8 +21,8 @@ NewSoftSerial nss(6, 7);
 
 //we have static variables so we can track current position as well as max height and time
 
-static long Glat, Glon, GMaxLat, GMaxLong, Galt, GMaxAlt;
-static unsigned long Gage, Gdate, Gtime, GMaxAge, GMaxTime, GMaxDate;
+static long s_latitude, s_longitude, s_altitude, s_maxAltitude = 0;
+static unsigned long s_fixAge, s_date, s_time, s_maxDate, s_maxTime;
 
 void initGps(int receivePin, int transmitPin)
 {
@@ -33,46 +33,29 @@ void initGps(int receivePin, int transmitPin)
 
 void gpsdump()
 {
-  long lat, lon;
-  float flat, flon;
-  unsigned long age, date, time, chars;
-  int year;
-  byte month, day, hour, minute, second, hundredths;
+  unsigned long chars;
   unsigned short sentences, failed;
-
-  gps.get_position(&lat, &lon, &age);
-  Glat = lat;
-  Glon = lon;
-  Gage = age;  
 
   feedgps(); // If we don't feed the gps during this long routine, we may drop characters and get checksum errors
 
-  gps.f_get_position(&flat, &flon, &age);
+  gps.get_position(&s_latitude, &s_longitude, &s_fixAge);
 
   feedgps();
 
-  gps.get_datetime(&date, &time, &age);  
-  Gdate = date;
-  Gtime = time;
-
+  gps.get_datetime(&s_date, &s_time, &s_fixAge);  
+ 
   feedgps();
 
-  gps.crack_datetime(&year, &month, &day, &hour, &minute, &second, &hundredths, &age);
-
-  feedgps();
-
-  Galt = gps.altitude();
-  if (Galt > GMaxAlt) 
+  s_altitude = gps.altitude();
+  
+  if (s_altitude > s_maxAltitude) 
   {
-    GMaxAlt = Galt;
-    GMaxTime = Gtime;
-    GMaxDate = Gdate;
+    s_maxAltitude = s_altitude;
+    s_maxTime = s_time;
+    s_maxDate = s_date;
   }
 
-
   feedgps();
-
-  gps.stats(&chars, &sentences, &failed);
 }
 
 bool feedgps()
@@ -80,12 +63,15 @@ bool feedgps()
   while (nss.available())
   {
     if (gps.encode(nss.read()))
+    {
       return true;
+    }
   }
   return false;
 }
 
 void GetGPSDataCSV(char userString[])
 {
-  sprintf(userString, "ARDSENSE %ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld", Glat, Glon, Gdate, Gtime, Galt, GMaxAlt, GMaxDate, GMaxTime);
+  sprintf(userString, "ARDSENSE %ld,%ld,%lu,%lu,%ld,%ld,%lu,%lu", 
+    s_latitude, s_longitude, s_date, s_time, s_altitude, s_maxAltitude, s_maxDate, s_maxTime);
 }
