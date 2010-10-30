@@ -91,6 +91,8 @@ History
 ---
 
 * Update pins to match the balloon flight computer layout
+* Add logging
+* Code cleanup
 
 License
 =======
