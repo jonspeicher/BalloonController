@@ -45,8 +45,8 @@ uint32_t s_lastLogMillis = 0;
 
 void setup()
 { 
-  //initLog();
-  //logString("------ Begin Logging ------");
+  initLog();
+  logString("------ Begin Logging ------");
   
   initGps(GPS_RECEIVE_PIN, GPS_TRANSMIT_PIN);
   initAnalogMux(ANALOG_MUX_PIN_S0, ANALOG_MUX_PIN_S1, ANALOG_MUX_PIN_S2, ANALOG_MUX_PIN_S3);
@@ -69,7 +69,7 @@ void loop()
     logGpsData();
     logAccelerometerData();
     logTemperatureData();
-    //logFlush();  
+    logFlush();  
     
     s_lastLogMillis = millis();
     Serial.println();
@@ -88,7 +88,7 @@ void logGpsData()
   GetGPSDataCSV(dataString);
   
   Serial.println(dataString);
-  //logString(dataString);
+  logString(dataString);
 }
 
 void logAccelerometerData()
@@ -108,7 +108,7 @@ void logAccelerometerData()
   accel_get_all(dataString);
   
   Serial.println(dataString);
-  //logString(dataString);
+  logString(dataString);
 }
 
 void logTemperatureData()
@@ -128,5 +128,5 @@ void logTemperatureData()
   sprintf(dataString, "%04X,%04X,%04X", insideTemp, outsideTemp, batteryTemp);
   
   Serial.println(dataString);
-  //logString(dataString);
+  logString(dataString);
 }
