@@ -8,8 +8,7 @@
 
 // Define the data sampling rate in milliseconds.
 
-//#define DATA_SAMPLING_RATE_MS 60000    // 60000 ms = 1 min
-#define DATA_SAMPLING_RATE_MS 5000
+#define DATA_SAMPLING_RATE_MS 60000    // 60000 ms = 1 min
 
 // Define the transmit and receive pins that the GPS module is connected to.
 

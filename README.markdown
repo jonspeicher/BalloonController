@@ -96,6 +96,11 @@ History
 * Add logging
 * Code cleanup
 
+0.3
+---
+
+* Update logging interval to one minute
+
 License
 =======
 
