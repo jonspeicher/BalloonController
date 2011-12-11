@@ -17,7 +17,7 @@ HackPittsburgh participants to interface with the various flight computer subsys
 
 Previous balloon launch photos are available at the
 [HackPittsburgh Flickr Pool](http://www.flickr.com/groups/hackpgh).  My favorites, plus my ground
-photos, are in [My Flickr set](http://www.flickr.com/photos/jonspeicher/sets/72157624683638916/).
+photos, are at [my Flickr page](http://www.flickr.com/photos/jonspeicher).
 
 Minimum Requirements
 ====================
