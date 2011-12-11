@@ -6,17 +6,16 @@ BalloonController is a flight computer data collection and logging system for a 
 Description
 ===========
 
-[HackPittsburgh](http://www.hackpittsburgh.org) has launched two high-altitude balloon projects.  
-One was successful, one was not.  Our third launch is pending, and the payload is anticipated to 
-include a number of sensors not previously flown.  This will require a controller that knows about
-the layout of the flight computer circuit, the data to be logged, how to retrieve it, and how to log
-it.
+[HackPittsburgh](http://www.hackpittsburgh.org) has launched several high-altitude balloon projects.
+From the third launch forward, the payload is anticipated to include a number of sensors not
+previously flown.  This requires a controller that knows about the layout of the flight computer
+circuit, the data to be logged, how to retrieve it, and how to log it.
 
 This software package contains that controller (which by extension includes the Arduino sketch's
-`setup` and `loop` functions).  This package also includes libraries contributed by other 
+`setup` and `loop` functions).  This package also includes libraries contributed by other
 HackPittsburgh participants to interface with the various flight computer subsystems.
 
-Previous balloon launch photos are available at the 
+Previous balloon launch photos are available at the
 [HackPittsburgh Flickr Pool](http://www.flickr.com/groups/hackpgh).  My favorites, plus my ground
 photos, are in [My Flickr set](http://www.flickr.com/photos/jonspeicher/sets/72157624683638916/).
 
@@ -37,8 +36,8 @@ Minimum Requirements
 Installation
 ============
 
-Refer to the installation instructions on the Arduino website to install the development 
-environment.  To install the required libraries, assuming you are using a modern Arduino 
+Refer to the installation instructions on the Arduino website to install the development
+environment.  To install the required libraries, assuming you are using a modern Arduino
 environment, simply unzip them to their own directories within:
 
     [your_sketchbook_directory]/libraries
@@ -49,7 +48,7 @@ Usage
 =====
 
 To use BalloonController in your project, you must ensure that a few preprocessor definitions are
-accurate, and you must of course wire up the proper circuit.  The best place to see what is required 
+accurate, and you must of course wire up the proper circuit.  The best place to see what is required
 is in the code itself.  If you have any questions, email me.
 
 Tests
@@ -59,7 +58,7 @@ BalloonController has been bench-tested with the flight computer.  GPS, accelero
 have been verified to work.  Temperature sensing is thought to work in the software but we believe
 that there is a bug in the circuit itself.
 
-The individual units upon which BalloonController relies have also been tested, and I tried to be 
+The individual units upon which BalloonController relies have also been tested, and I tried to be
 careful with the coding and design.
 
 Improvements
